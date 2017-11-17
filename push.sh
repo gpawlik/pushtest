@@ -9,12 +9,7 @@ pull () {
   if [ -n "$(git status --porcelain)" ]; then
     echo "There are new changes coming from Smartling"
     gitpush
-    curl --silent \
-        --header "Authorization: token $GITHUB_AUTH_TOKEN" \
-        --header "Content-Type: application/json" \
-        --data '{"title":"'"$PR_TITLE"'", "head": "'"$TRANSLATIONS_BRANCH"'", "base": "'"$BASE_BRANCH"'", "body": "'"$PR_BODY"'"}' \
-        --request POST \
-        https://api.github.com/repos/"$REPO_ORG"/"$REPO_SLUG"/pulls | jq '.number'
+    gitpr | jq '.number'
     PR_NUMBER=2
     gitlabel PR_NUMBER
   else
@@ -31,7 +26,7 @@ gitpush () {
 
 gitpr () {
   echo "Create a pull request"
-  curl --silent \
+  return curl --silent \
       --header "Authorization: token $GITHUB_AUTH_TOKEN" \
       --header "Content-Type: application/json" \
       --data '{"title":"'"$PR_TITLE"'", "head": "'"$TRANSLATIONS_BRANCH"'", "base": "'"$BASE_BRANCH"'", "body": "'"$PR_BODY"'"}' \
