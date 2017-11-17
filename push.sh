@@ -18,7 +18,7 @@ pull () {
       echo "PR already existed";
     fi
   else
-    echo "There are no changes...";
+    echo "There are no changes";
   fi
 }
 
