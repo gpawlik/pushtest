@@ -11,7 +11,7 @@ pull () {
     gitpush
     echo "Create a pull request"
     PR_NUMBER=$(gitpr)
-    if [ -n "${PR_NUMBER}" ]; then
+    if [ "${PR_NUMBER}" = "null" ]; then
         echo "Label pull request"
         gitlabel $PR_NUMBER
     else
