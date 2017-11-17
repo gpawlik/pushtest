@@ -45,7 +45,7 @@ gitlabel () {
   echo "Update pull request label"
   curl --header "Authorization: token $GITHUB_AUTH_TOKEN" \
       --header "Content-Type: application/json" \
-      --data '["translations"]' \
+      --data '["help wanted"]' \
       --request POST \
       https://api.github.com/repos/"$REPO_ORG"/"$REPO_SLUG"/issues/$1/labels
 }
