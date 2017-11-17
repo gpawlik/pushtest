@@ -26,7 +26,7 @@ gitpush () {
 
 gitpr () {
   echo "Create a pull request"
-  curl --silent \
+  return curl --silent \
       --header "Authorization: token $GITHUB_AUTH_TOKEN" \
       --header "Content-Type: application/json" \
       --data '{"title":"'"$PR_TITLE"'", "head": "'"$TRANSLATIONS_BRANCH"'", "base": "'"$BASE_BRANCH"'", "body": "'"$PR_BODY"'"}' \
