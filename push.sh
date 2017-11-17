@@ -16,7 +16,7 @@ pull () {
         gitlabel $PR_NUMBER
     fi
   else
-    echo "There are no changes";
+    echo "There are no changes...";
   fi
 }
 
