@@ -30,7 +30,7 @@ gitpr () {
       --header "Content-Type: application/json" \
       --data '{"title":"'"$PR_TITLE"'", "head": "'"$TRANSLATIONS_BRANCH"'", "base": "'"$BASE_BRANCH"'", "body": "'"$PR_BODY"'"}' \
       --request POST \
-      https://api.github.com/repos/"$REPO_ORG"/"$REPO_SLUG"/pulls | jq '.[0].owner.id'
+      https://api.github.com/repos/"$REPO_ORG"/"$REPO_SLUG"/pulls | jq '.owner.id'
 }
 
 gitlabel () {
