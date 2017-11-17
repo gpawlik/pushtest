@@ -11,7 +11,7 @@ pull () {
     gitpush
     PR_NUMBER=$(gitpr)
     echo "PR: $PR_NUMBER"
-    if [ -z "${PR_NUMBER}" ]; then
+    if [ -n "${PR_NUMBER}" ]; then
         echo "Label"
         gitlabel PR_NUMBER
     fi
