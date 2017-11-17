@@ -5,15 +5,17 @@ set -e
 eval $(cat .env | sed 's/^/export /')
 
 pull () {
-  echo "Checking if any changes"
+  echo "Checking if there is any changes"
   if [ -n "$(git status --porcelain)" ]; then
     echo "There are new changes coming from Smartling"
     gitpush
+    echo "Create a pull request"
     PR_NUMBER=$(gitpr)
-    echo "PR: $PR_NUMBER"
     if [ -n "${PR_NUMBER}" ]; then
-        echo "Label"
+        echo "Label pull request"
         gitlabel $PR_NUMBER
+    else
+      echo "PR already existed, label got inherited.";
     fi
   else
     echo "There are no changes...";
@@ -37,11 +39,6 @@ gitpr () {
 }
 
 gitlabel () {
-  #PR_NUMBER="$(gitpr | jq -r '.number')"
-
-  #echo "pr ${PR_NUMBER}"
-
-  #if PR number
   echo "Update pull request label $1"
   curl --header "Authorization: token $GITHUB_AUTH_TOKEN" \
       --header "Content-Type: application/json" \
