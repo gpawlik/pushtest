@@ -13,7 +13,7 @@ pull () {
     echo "PR: $PR_NUMBER"
     if [ -n "${PR_NUMBER}" ]; then
         echo "Label"
-        gitlabel PR_NUMBER
+        gitlabel $PR_NUMBER
     fi
   else
     echo "There are no changes";
@@ -45,7 +45,7 @@ gitlabel () {
   echo "Update pull request label $1"
   curl --header "Authorization: token $GITHUB_AUTH_TOKEN" \
       --header "Content-Type: application/json" \
-      --data '["something"]' \
+      --data '["something else"]' \
       --request POST \
       https://api.github.com/repos/"$REPO_ORG"/"$REPO_SLUG"/issues/$1/labels
 }
