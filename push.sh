@@ -10,15 +10,18 @@ pull () {
     echo "There are new changes coming from Smartling"
     gitpush
     PR_NUMBER=$(gitpr)
-    echo "PR: $PR_NUMBER"
-    gitlabel PR_NUMBER
+    if [ -z "${PR_NUMBER}" ]; then
+        echo "Label"
+        echo "PR: $PR_NUMBER"
+        gitlabel PR_NUMBER
+    fi
   else
     echo "There are no changes";
   fi
 }
 
 gitpush () {
-  echo "Commit changes"
+  echo "Commit changes and push to branch"
   git add -A
   git commit -m "$COMMIT_MESSAGE"
   git push origin $TRANSLATIONS_BRANCH
@@ -30,7 +33,7 @@ gitpr () {
       --header "Content-Type: application/json" \
       --data '{"title":"'"$PR_TITLE"'", "head": "'"$TRANSLATIONS_BRANCH"'", "base": "'"$BASE_BRANCH"'", "body": "'"$PR_BODY"'"}' \
       --request POST \
-      https://api.github.com/repos/"$REPO_ORG"/"$REPO_SLUG"/pulls
+      https://api.github.com/repos/"$REPO_ORG"/"$REPO_SLUG"/pulls | jq '.number'
 }
 
 gitlabel () {
