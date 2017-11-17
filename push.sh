@@ -9,7 +9,9 @@ pull () {
   if [ -n "$(git status --porcelain)" ]; then
     echo "There are new changes coming from Smartling"
     gitpush
-    gitpr
+    gitpr | jq -r '.number'
+    PR_NUMBER=2
+    gitlabel PR_NUMBER
   else
     echo "There are no changes";
   fi
@@ -42,7 +44,7 @@ gitlabel () {
       --header "Content-Type: application/json" \
       --data '["translations"]' \
       --request POST \
-      https://api.github.com/repos/"$REPO_ORG"/"$REPO_SLUG"/issues/${PR_NUMBER}/labels
+      https://api.github.com/repos/"$REPO_ORG"/"$REPO_SLUG"/issues/$1/labels
 }
 
 if [[ $# -ne 1 ]]; then
