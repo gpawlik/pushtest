@@ -25,12 +25,12 @@ gitpush () {
 }
 
 gitpr () {
-  echo curl --silent \
+  echo $(curl --silent \
       --header "Authorization: token $GITHUB_AUTH_TOKEN" \
       --header "Content-Type: application/json" \
       --data '{"title":"'"$PR_TITLE"'", "head": "'"$TRANSLATIONS_BRANCH"'", "base": "'"$BASE_BRANCH"'", "body": "'"$PR_BODY"'"}' \
       --request POST \
-      https://api.github.com/repos/"$REPO_ORG"/"$REPO_SLUG"/pulls | jq '.number'
+      https://api.github.com/repos/"$REPO_ORG"/"$REPO_SLUG"/pulls | jq '.number')
 }
 
 gitlabel () {
