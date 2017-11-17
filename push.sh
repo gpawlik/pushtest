@@ -10,6 +10,7 @@ pull () {
     echo "There are new changes coming from Smartling"
     gitpush
     PR_NUMBER=$(gitpr)
+    echo "PR: $PR_NUMBER"
     gitlabel PR_NUMBER
   else
     echo "There are no changes";
