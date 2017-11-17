@@ -15,7 +15,7 @@ pull () {
         echo "Label pull request"
         gitlabel $PR_NUMBER
     else
-      echo "PR already existed, label got inherited.";
+      echo "PR already existed";
     fi
   else
     echo "There are no changes...";
