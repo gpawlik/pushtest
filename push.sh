@@ -42,10 +42,10 @@ gitlabel () {
   #echo "pr ${PR_NUMBER}"
 
   #if PR number
-  echo "Update pull request label"
+  echo "Update pull request label $1"
   curl --header "Authorization: token $GITHUB_AUTH_TOKEN" \
       --header "Content-Type: application/json" \
-      --data '["help wanted"]' \
+      --data '["something"]' \
       --request POST \
       https://api.github.com/repos/"$REPO_ORG"/"$REPO_SLUG"/issues/$1/labels
 }
