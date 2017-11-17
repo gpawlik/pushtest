@@ -10,9 +10,9 @@ pull () {
     echo "There are new changes coming from Smartling"
     gitpush
     PR_NUMBER=$(gitpr)
+    echo "PR: $PR_NUMBER"
     if [ -z "${PR_NUMBER}" ]; then
         echo "Label"
-        echo "PR: $PR_NUMBER"
         gitlabel PR_NUMBER
     fi
   else
